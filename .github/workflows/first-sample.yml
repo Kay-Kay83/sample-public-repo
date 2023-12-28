@@ -9,14 +9,17 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
 
-      - name: WELCOME MESSAGE
-        run: echo "First github actions step"
+      - name: Multiline Execution
+        run: |
+              echo "First github actions step"
+              ls -al
+              cat README.md
       
-      - name: List Files
-        run: ls -al
-      
-      - name: Read Files
-        run: cat README.md
-      
-      - name: Checkout Repo Path
-        run: echo $GITHUB_WORKSPACE
+      #- name: List Files
+      #  run: 
+      #
+      #- name: Read Files
+      #  run: 
+      #
+      #- name: Checkout Repo Path
+      #  run: echo $GITHUB_WORKSPACE
