@@ -28,7 +28,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: cowsay_dragon_file
-          path: cowsay_dragon.txt
 
       - name: Test-artifact
         run: grep -i "dragon" cowsay_dragon.txt
@@ -42,8 +41,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: cowsay_dragon_file
-          path: cowsay_dragon.txt
-          
+
       - name: List artifact
         run: ls -al
       
