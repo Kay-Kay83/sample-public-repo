@@ -3,16 +3,49 @@ name: generate-ascii
 on: push
 
 jobs:
-  ascii-job-01:
+  ascii-build-job:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
 
-      - name: List repo files
-        run: ls -al
-        
-      - name: Execute Shell Script
+      - name: Build-cowsay-artifact
         run: |
-            chmod +x ascii-cowsay.sh
-            ./ascii-cowsay.sh
+          sudo apt-get install cowsay -y
+          cowsay -f dragon "hey there, I am a dragon. Are you scared?? :D" >> cowsay_dragon.txt
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cowsay_dragon_file
+          path: cowsay_dragon.txt
+
+  ascii-test-job:
+    needs: ascii-build-job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: cowsay_dragon_file
+          path: cowsay_dragon.txt
+
+      - name: Test-artifact
+        run: grep -i "dragon" cowsay_dragon.txt
+  
+  ascii-deploy-job:
+    needs: ascii-test-job
+    runs-on: ubuntu-latest
+    name: Deploy-artifact
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: cowsay_dragon_file
+          path: cowsay_dragon.txt
+          
+      - name: List artifact
+        run: ls -al
+      
+      - name: Read artifact
+        run: cat cowsay_dragon.txt
