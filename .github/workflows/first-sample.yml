@@ -17,3 +17,6 @@ jobs:
       
       - name: Read Files
         run: cat README.md
+      
+      - name: Checkout Repo Path
+        run: echo $GITHUB_WORKSPACE
