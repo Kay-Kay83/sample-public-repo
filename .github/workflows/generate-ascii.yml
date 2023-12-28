@@ -1,0 +1,19 @@
+name: generate-ascii
+
+on: push
+
+jobs:
+  ascii-job-01:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Install Cowsay
+        run: sudo apt-get install cowsay -y
+
+      - name: Execute Cowsay
+        run: cowsay -f dragon "hey there, I am a dragon. Are you scared?? :D" >> cowsay_dragon.txt
+
+      - name: Read cowsay file
+        run: cat cowsay_dragon.txt
