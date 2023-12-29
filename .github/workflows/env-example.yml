@@ -21,10 +21,8 @@ jobs:
 
       - name: docker publish
         env:
-          DOCKER_USERNAME: techtalker
-          DOCKER_REGISTRY: docker.io
-          IMAGE_NAME: github-actions-ngnix
-        run: docker push $DOCKER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+          IMAGE_NAME: ngnix
+        run: docker pull ${{env.IMAGE_NAME}}:latest
   
   deploy:
      needs: docker
@@ -34,6 +32,6 @@ jobs:
         env:
           DOCKER_USERNAME: techtalker
           DOCKER_REGISTRY: docker.io
-          IMAGE_NAME: github-actions-ngnix
+          IMAGE_NAME: ngnix
         run: docker run -d -p 8080:80 $DOCKER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
