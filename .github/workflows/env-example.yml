@@ -8,23 +8,23 @@ jobs:
     steps:
       - name: docker build
         env:
-          DOCKER_USERNAME: kaykay
+          DOCKER_USERNAME: techtalker
           DOCKER_REGISTRY: docker.io
           IMAGE_NAME: github-actions-ngnix
-        run: docker build -t docker.io/dockerUsername/imageName:latest
+        run: docker build -t $DOCKER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
       - name: docker login
         env:
-          DOCKER_USERNAME: kaykay
-          DOCKER_PASSWORD: S@mP1ep@ssw0rd
-        run: docker login --username=dockerUsername --password=S@mP1ep@ssw0rd
+          DOCKER_USERNAME: techtalker
+          DOCKER_PASSWORD: Revathy@1950
+        run: docker login --username=${(env.DOCKER_USERNAME)} --password=${(env.DOCKER_PASSWORD)}
 
       - name: docker publish
         env:
-          DOCKER_USERNAME: kaykay
+          DOCKER_USERNAME: techtalker
           DOCKER_REGISTRY: docker.io
           IMAGE_NAME: github-actions-ngnix
-        run: docker push docker.io/dockerUsername/imageName:latest
+        run: docker push $DOCKER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
   
   deploy:
      needs: docker
@@ -32,8 +32,8 @@ jobs:
      steps:
       - name: docker run
       env:
-        DOCKER_USERNAME: kaykay
+        DOCKER_USERNAME: techtalker
         DOCKER_REGISTRY: docker.io
         IMAGE_NAME: github-actions-ngnix
-        run: docker run -d -p 8080:80 docker.io/dockerUsername/imageName:latest
+        run: docker run -d -p 8080:80 $DOCKER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
