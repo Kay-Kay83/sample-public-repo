@@ -9,7 +9,7 @@ jobs:
       - name: docker build
         env:
           DOCKER_USERNAME: techtalker
-          DOCKER_REGISTRY: docker.io
+          DOCKER_REGISTRY: registry.hub.docker.com
           IMAGE_NAME: ngnix
         run: echo docker build -t $DOCKER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
@@ -26,7 +26,7 @@ jobs:
       - name: docker run
         env:
           DOCKER_USERNAME: techtalker
-          DOCKER_REGISTRY: docker.io
+          DOCKER_REGISTRY: registry.hub.docker.com
           IMAGE_NAME: ngnix
         run: |
           docker pull ${{env.IMAGE_NAME}}:stable-perl
