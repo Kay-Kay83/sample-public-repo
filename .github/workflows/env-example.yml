@@ -29,6 +29,6 @@ jobs:
           DOCKER_REGISTRY: docker.io
           IMAGE_NAME: containerofcats
         run: |
-          docker pull ${{env.DOCKER_REGISTRY}}/library/${{env.IMAGE_NAME}}:stable-perl
+          docker pull ${{env.DOCKER_REGISTRY}}/library/${{env.IMAGE_NAME}}:latest
           docker run -d -p 8080:80 $DOCKER_REGISTRY/$IMAGE_NAME:latest
 
