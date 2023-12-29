@@ -1,0 +1,38 @@
+name: environment-variables-workflow
+
+on: push
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: docker build
+        env:
+          DOCKER_USERNAME: kaykay
+          DOCKER_REGISTRY: docker.io
+          IMAGE_NAME: github-actions-ngnix
+        run: docker build -t docker.io/dockerUsername/imageName:latest
+
+      - name: docker login
+        env:
+          DOCKER_USERNAME: kaykay
+          DOCKER_PASSWORD: S@mP1ep@ssw0rd
+        run: docker login --username=dockerUsername --password=S@mP1ep@ssw0rd
+
+      - name: docker publish
+        env:
+          DOCKER_USERNAME: kaykay
+          DOCKER_REGISTRY: docker.io
+          IMAGE_NAME: github-actions-ngnix
+        run: docker push docker.io/dockerUsername/imageName:latest
+  
+  deploy:
+     runs-on: ubuntu-latest
+     steps:
+      - name: docker run
+      env:
+        DOCKER_USERNAME: kaykay
+        DOCKER_REGISTRY: docker.io
+        IMAGE_NAME: github-actions-ngnix
+        run: docker run -d -p 8080:80 docker.io/dockerUsername/imageName:latest
+
