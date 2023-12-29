@@ -29,6 +29,6 @@ jobs:
           DOCKER_REGISTRY: registry.hub.docker.com
           IMAGE_NAME: ngnix
         run: |
-          docker pull ${{env.IMAGE_NAME}}:stable-perl
-          docker run -d -p 8080:80 $DOCKER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:stable-perl
+          docker pull ${{env.DOCKER_REGISTRY}}/library/${{env.IMAGE_NAME}}:stable-perl
+          docker run -d -p 8080:80 $DOCKER_REGISTRY/$IMAGE_NAME:stable-perl
 
