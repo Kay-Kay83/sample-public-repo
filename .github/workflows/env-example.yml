@@ -31,9 +31,9 @@ jobs:
      runs-on: ubuntu-latest
      steps:
       - name: docker run
-      env:
-        DOCKER_USERNAME: techtalker
-        DOCKER_REGISTRY: docker.io
-        IMAGE_NAME: github-actions-ngnix
+        env:
+          DOCKER_USERNAME: techtalker
+          DOCKER_REGISTRY: docker.io
+          IMAGE_NAME: github-actions-ngnix
         run: docker run -d -p 8080:80 $DOCKER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
