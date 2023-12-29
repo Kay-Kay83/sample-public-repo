@@ -11,7 +11,7 @@ jobs:
           DOCKER_USERNAME: techtalker
           DOCKER_REGISTRY: docker.io
           IMAGE_NAME: github-actions-ngnix
-        run: docker build -t $DOCKER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+        run: echo docker build -t $DOCKER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
       - name: docker login
         env:
