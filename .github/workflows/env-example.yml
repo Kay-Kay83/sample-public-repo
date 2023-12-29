@@ -8,23 +8,16 @@ jobs:
     steps:
       - name: docker build
         env:
-          DOCKER_USERNAME: techtalker
+          DOCKER_USERNAME: siddharth1
           DOCKER_REGISTRY: docker.io
           IMAGE_NAME: github-actions-ngnix
         run: echo docker build -t $DOCKER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
       - name: docker login
         env:
-          DOCKER_USERNAME: techtalker
-          DOCKER_PASSWORD: Revathy@1950
-        run: docker login --username=${(env.DOCKER_USERNAME)} --password=${(env.DOCKER_PASSWORD)}
-
-      - name: docker publish
-        env:
-          DOCKER_USERNAME: techtalker
-          DOCKER_REGISTRY: docker.io
-          IMAGE_NAME: github-actions-ngnix
-        run: docker push $DOCKER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+          DOCKER_USERNAME: siddharth1
+          DOCKER_PASSWORD: s3cUrePaSsw0rd
+        run: docker login --username=${{env.DOCKER_USERNAME}} --password=${{env.DOCKER_PASSWORD}}
   
   deploy:
      needs: docker
@@ -32,8 +25,10 @@ jobs:
      steps:
       - name: docker run
         env:
-          DOCKER_USERNAME: techtalker
+          DOCKER_USERNAME: siddharth1
           DOCKER_REGISTRY: docker.io
           IMAGE_NAME: github-actions-ngnix
-        run: docker run -d -p 8080:80 $DOCKER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+        run: |
+          docker pull ${{env.DOCKER_REGISTRY}}/library/${{env.IMAGE_NAME}}:stable-perl
+          docker run -d -p 8080:80 $DOCKER_REGISTRY/$IMAGE_NAME:stable-perl
 
