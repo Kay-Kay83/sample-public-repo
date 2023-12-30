@@ -33,4 +33,5 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      run: docker ps
+      - name: Check container status
+        run: docker ps
