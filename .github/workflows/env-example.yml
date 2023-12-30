@@ -2,14 +2,50 @@ name: environment-variables-workflow
 
 on: push
 
+# Declaring evnironment variables on Steps and Jobs
+#jobs:
+#  docker:
+#    runs-on: ubuntu-latest
+#    env:
+#      DOCKER_USERNAME: techtalker
+#      DOCKER_REGISTRY: techtalker
+#      IMAGE_NAME: containerofcats
+#      DOCKER_PASSWORD: Revathy@1950
+#    steps:
+#      - name: docker login
+#        run: |
+#            docker login --username=${{env.DOCKER_USERNAME}} --password=${{env.DOCKER_PASSWORD}}
+#            docker pull ${{env.DOCKER_REGISTRY}}/${{env.IMAGE_NAME}}:latest
+#  deploy:
+#     needs: docker
+#     runs-on: ubuntu-latest
+#     steps:
+#      - name: docker run
+#        env:
+#          DOCKER_USERNAME: techtalker
+#          DOCKER_PASSWORD: Revathy@1950
+#          DOCKER_REGISTRY: techtalker
+#          IMAGE_NAME: containerofcats
+#        run: |
+#          docker login --username=${{env.DOCKER_USERNAME}} --password=${{env.DOCKER_PASSWORD}}
+#          docker run -d -p 8080:80 $DOCKER_REGISTRY/$IMAGE_NAME:latest
+#
+#  test:
+#    needs: deploy
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Check container status
+#        run: docker ps
+
+# Declaring evnironment variables on workflows
+env:
+  DOCKER_USERNAME: techtalker
+  DOCKER_REGISTRY: techtalker
+  IMAGE_NAME: containerofcats
+  DOCKER_PASSWORD: Revathy@1950
 jobs:
   docker:
     runs-on: ubuntu-latest
-    env:
-      DOCKER_USERNAME: techtalker
-      DOCKER_REGISTRY: techtalker
-      IMAGE_NAME: containerofcats
-      DOCKER_PASSWORD: Revathy@1950
     steps:
       - name: docker login
         run: |
@@ -20,11 +56,6 @@ jobs:
      runs-on: ubuntu-latest
      steps:
       - name: docker run
-        env:
-          DOCKER_USERNAME: techtalker
-          DOCKER_PASSWORD: Revathy@1950
-          DOCKER_REGISTRY: techtalker
-          IMAGE_NAME: containerofcats
         run: |
           docker login --username=${{env.DOCKER_USERNAME}} --password=${{env.DOCKER_PASSWORD}}
           docker run -d -p 8080:80 $DOCKER_REGISTRY/$IMAGE_NAME:latest
