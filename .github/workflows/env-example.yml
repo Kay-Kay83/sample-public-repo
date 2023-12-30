@@ -14,7 +14,7 @@ jobs:
       - name: docker login
         run: |
             docker login --username=${{env.DOCKER_USERNAME}} --password=${{env.DOCKER_PASSWORD}}
-            docker pull ${{env.DOCKER_REGISTRY}}/library/${{env.IMAGE_NAME}}:latest
+            docker pull ${{env.DOCKER_REGISTRY}}/${{env.IMAGE_NAME}}:latest
   deploy:
      needs: docker
      runs-on: ubuntu-latest
